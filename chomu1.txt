@@ -1,0 +1,40 @@
+% Forward Kinematics of 3R Robotic Arm 
+%Inputs 
+L1 = 1 
+L2 = 0.75 
+L3 = 0.5 
+theta1 = linspace(0,90,4); 
+theta2 = linspace(0,90,4); 
+theta3 = linspace(0,90,4); 
+ct = 1 
+%Program 
+for i = 1:length(theta1);
+    Theta1 = theta1(i); 
+ for j = 1:length(theta2); 
+ Theta2 = theta2(j); 
+ for K = 1:length(theta3); 
+ Theta3 = theta3(K); 
+ 
+ 
+x0 = 0; 
+y0 = 0; 
+x1 = L1*cosd(Theta1); 
+y1 = L1*sind(Theta1); 
+x2 = x1 + L2*cosd(Theta2); 
+y2 = y1 + L2*sind(Theta2); 
+x3 = x2 + L3*cosd(Theta3); 
+y3 = y2 + L3*sind(Theta3); 
+%Plot 
+plot([x0 x1],[y0 y1],[x1 x2],[y1 y2],[x2 x3],[y2 y3], 'Linewidth',2); 
+axis([-1 2 0 2]); 
+pause(0.03); 
+M(ct) = getframe(gcf); 
+ct = ct+1; 
+ end 
+ end 
+end 
+movie(M) 
+videofile = VideoWriter('Forward_Kinematics_3R_Robotic_Arm.avi', 'uncompressed AVI') 
+open(videofile); 
+writeVideo(videofile,M); 
+close(videofile)
